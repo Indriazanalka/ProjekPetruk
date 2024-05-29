@@ -90,3 +90,47 @@ int checkPrecedence(string op){
   }
 return result;
 }
+
+vector<string>
+convertToPostfix(vector<string>infix){
+  vector<string>op=
+{"+","-","*","/","%"};
+  vector<string>kurung={"(",")"};
+  stack<string>result;
+  vector<string>postfix;
+  vector<string>::iterator i = infix.begin();
+
+while(i !=infix.end()){
+if(*i=="("){
+result.push(*i);
+}else if(*i == ")"){
+while(!result.empty()&& result.top()!="("){
+
+postfix.push_back(result.top());
+result.pop();
+}
+result.pop();
+}else if(checkString(*i, op)){
+if(result.empty()||result.top() == "("){
+result.push(*i);
+}else{
+while(!result.empty()&&result.top()!="("&&checkPrecedence(*i)>=checkPrecedence(result.top())){
+
+postfix.push_back(result.top());
+result.pop();
+}
+result.push(*i);
+}
+}else}
+postfix.push_back(*i);
+}
+i++;
+}
+
+while(!result.empty()){
+postfix.push_back(result.top());
+result.pop();
+}
+
+return postfix;
+}
