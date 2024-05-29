@@ -134,3 +134,41 @@ result.pop();
 
 return postfix;
 }
+
+double
+evaluateOperation(vector<string>postfix){
+  vector<string> op = {"+","-","*","/","%"};
+stack<double> result;
+vector<string>::iterator i = postfix.begin();
+double a, b, c;
+string temp;
+
+ while(i != postfix.end(){
+    if(checkString(*i, op)){
+      a = result.top(); result.pop();
+      b = result.top(); result.pop(); temp = *i;
+      c = doOperation(a,b,temp); result.push(c);
+    }else{
+        result.push(strtod((*i).c_str(),NULL));
+    }
+   i++;
+ }
+return result.top();
+}
+
+double doOperation(double a, double b, string op){
+  double result;
+   if(op == "+"){
+     result = b + a;
+   }else if(op == "-"){
+     result = b - a;
+   }else if(op == "*"){
+     result = b * a;
+   }else if(op == "/"){
+     result = b / a;
+   }else if(op == "%"){
+     result = fmod(b,a);
+   }
+return result;
+}
+
